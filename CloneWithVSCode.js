@@ -4,7 +4,7 @@
 // @namespace    https://github.com/Johannes7k75
 // @version      1.0.0
 // @match        https://github.com/*/*
-// @updateurl    
+// @updateurl    https://raw.githubusercontent.com/Johannes7k75/tapermonkey-user-scripts/refs/heads/main/CloneWithVSCode.js
 // ==/UserScript==
 
 (function () {
