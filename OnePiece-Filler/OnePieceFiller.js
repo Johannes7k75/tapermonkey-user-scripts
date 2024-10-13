@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name         AniWorld OnePice Filler highlighter
-// @description  Highlights Filler episodes on aniworld for OnePiece in red
-// @namespace    https://github.com/Johannes7k75
-// @version      1.0.1
-// @match        https://aniworld.to/anime/stream/one-piece/*
-// @updateURL    https://raw.githubusercontent.com/Johannes7k75/tapermonkey-user-scripts/refs/heads/main/OnePiece-Filler/OnePieceFiller.js
-// @downloadURL  https://raw.githubusercontent.com/Johannes7k75/tapermonkey-user-scripts/refs/heads/main/OnePiece-Filler/OnePieceFiller.js
-// @resource one-piece.json    https://github.com/Johannes7k75/tapermonkey-user-scripts/releases/download/OnePieceFiller/one-piece.json
-// @grant GM_getResourceText
+// @name                    AniWorld OnePice Filler highlighter
+// @description             Highlights Filler episodes on aniworld for OnePiece in red
+// @namespace               https://github.com/Johannes7k75
+// @version                 1.0.2
+// @match                   https://aniworld.to/anime/stream/one-piece/*
+// @updateURL               https://raw.githubusercontent.com/Johannes7k75/tapermonkey-user-scripts/refs/heads/main/OnePiece-Filler/OnePieceFiller.js
+// @downloadURL             https://raw.githubusercontent.com/Johannes7k75/tapermonkey-user-scripts/refs/heads/main/OnePiece-Filler/OnePieceFiller.js
+// @resource one-piece.json https://github.com/Johannes7k75/tapermonkey-user-scripts/releases/download/OnePieceFiller/one-piece.json
+// @grant                   GM_getResourceText
 // ==/UserScript==
 
 (function () {
@@ -16,12 +16,10 @@
     let onePieceJson = [];
 
     try {
-        onePieceJson = GM_getResourceText("one-piece.json")
-    } catch () {
+        onePieceJson = JSON.parse(GM_getResourceText("one-piece.json"));
+    } catch (e) {
         console.warn("Could not parse Json file");
     }
-
-    const onePieceJson = JSON.parse()
 
     const [seasons, episodes] = document.querySelectorAll("#stream ul")
     const activeSeason = seasons.querySelector("li .active")
@@ -34,7 +32,7 @@
       background-color: rgb(161, 74, 64) !important;
       transition: unset !important;
   }
-  
+
   .filler:hover:not(.anything), .active.filler:not(.anything) {
       color: rgb(161, 74, 64) !important;
       font-weight: bold;
