@@ -11,5 +11,38 @@
 
 (function () {
   "use strict";
+
+  const [seasons, episodes] = document.querySelectorAll("#stream ul")
+const activeSeason = seasons.querySelector("li .active")
+
+const style = document.createElement("style")
+document.head.appendChild(style)
+
+style.innerHTML = `
+.filler a {
+    background-color: rgb(161, 74, 64) !important;
+    transition: unset !important;
+}
+
+.filler:hover {
+    color: rgb(161, 74, 64) !important;
+    font-weight: bold;
+}
+`
+
+for (const ep of episodes.children) {
+    const activeSeasonNum = Number.parseInt(activeSeason?.innerText)
+    const episodeNumber = Number.parseInt(ep.querySelector("a")?.innerText)
+
+    const isSameEpisode = (episode) => episode === episodeNumber
+    const isSameSeason = (season) => season === activeSeasonNum
+
+    const episodeData = onePieceJson.find((e)=>isSameEpisode(e.episode) && isSameSeason(e.season))
+
+    if (!episodeData) continue;
+    if (episodeData.isFiller) {
+        ep.classList.add("filler")
+    }
+}
   
 })();
