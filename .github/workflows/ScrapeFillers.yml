@@ -19,7 +19,7 @@ jobs:
           path: ./OnePiece-Filler/one-piece.js
 
       - name: Set today's date to env
-        run: echo "::set-env name=DATE::$(date +'%d.%m.%Y')"
+        run: echo "DATE=$(date +'%d.%m.%Y')" >> $GITHUB_ENV
 
       - name: Release
         uses: softprops/action-gh-release@v2
