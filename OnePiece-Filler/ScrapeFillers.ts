@@ -71,4 +71,4 @@ $(".EpisodeList").each((i, el) => {
     });
 });
 
-Bun.write("one-piece.js", `var onePieceJson = ${JSON.stringify(onePieceJson)};`);
+Bun.write("one-piece.json", JSON.stringify(onePieceJson));
