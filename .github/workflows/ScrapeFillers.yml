@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
 
-name: my-workflow
+name: Scrape-Fillers
 jobs:
   Scrape-Fillers:
     name: Scrape-Fillers
@@ -12,7 +12,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       # run any `bun` or `bunx` command
-      - run: cd OnePiece-Filler && bun install && bun ScrapeFillers.ts
+      - run: cd OnePiece-Filler && bun install cheerio && bun ScrapeFillers.ts
 
       - uses: actions/upload-artifact@v4.4.3
         with:
