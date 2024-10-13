@@ -18,4 +18,16 @@ jobs:
         with:
           name: my-artifact
           path: ./OnePiece-Filler/one-piece.js
+
+      - name: Get today's date
+        id: date
+        run: echo "date=$(date +'%d.%m.%Y')" >> $GITHUB_ENV
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "OnePieceFiller"
+          title: "One Piece Filler ${{ steps.date.outputs.date }}"
+          files: |
+            ./OnePiece-Filler/one-piece.js
     
