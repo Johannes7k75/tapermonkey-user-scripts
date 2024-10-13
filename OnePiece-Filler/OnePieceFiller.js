@@ -6,19 +6,30 @@
 // @match        https://aniworld.to/anime/stream/one-piece/*
 // @updateURL    https://raw.githubusercontent.com/Johannes7k75/tapermonkey-user-scripts/refs/heads/main/OnePiece-Filler/OnePieceFiller.js
 // @downloadURL  https://raw.githubusercontent.com/Johannes7k75/tapermonkey-user-scripts/refs/heads/main/OnePiece-Filler/OnePieceFiller.js
-// @require      https://github.com/Johannes7k75/tapermonkey-user-scripts/releases/download/OnePieceFiller/one-piece.js
+// @resource one-piece.json    https://github.com/Johannes7k75/tapermonkey-user-scripts/releases/download/OnePieceFiller/one-piece.json
+// @grant GM_getResourceText
 // ==/UserScript==
 
 (function () {
-	"use strict";
+    "use strict";
 
-	const [seasons, episodes] = document.querySelectorAll("#stream ul");
-	const activeSeason = seasons.querySelector("li .active");
+    let onePieceJson = [];
 
-	const style = document.createElement("style");
-	document.head.appendChild(style);
+    try {
+        onePieceJson = GM_getResourceText("one-piece.json")
+    } catch () {
+        console.warn("Could not parse Json file");
+    }
 
-	style.innerHTML = `
+    const onePieceJson = JSON.parse()
+
+    const [seasons, episodes] = document.querySelectorAll("#stream ul")
+    const activeSeason = seasons.querySelector("li .active")
+
+    const style = document.createElement("style")
+    document.head.appendChild(style)
+
+    style.innerHTML = `
   .filler {
       background-color: rgb(161, 74, 64) !important;
       transition: unset !important;
@@ -28,22 +39,20 @@
       color: rgb(161, 74, 64) !important;
       font-weight: bold;
   }
-  `;
+  `
 
-	for (const ep of episodes.children) {
-		const activeSeasonNum = Number.parseInt(activeSeason?.innerText);
-		const episodeNumber = Number.parseInt(ep.querySelector("a")?.innerText);
+    for (const ep of episodes.children) {
+        const activeSeasonNum = Number.parseInt(activeSeason?.innerText)
+        const episodeNumber = Number.parseInt(ep.querySelector("a")?.innerText)
 
-		const isSameEpisode = (episode) => episode === episodeNumber;
-		const isSameSeason = (season) => season === activeSeasonNum;
+        const isSameEpisode = (episode) => episode === episodeNumber
+        const isSameSeason = (season) => season === activeSeasonNum
 
-		const episodeData = onePieceJson.find(
-			(e) => isSameEpisode(e.episode) && isSameSeason(e.season),
-		);
+        const episodeData = onePieceJson.find((e) => isSameEpisode(e.episode) && isSameSeason(e.season))
 
-		if (!episodeData) continue;
-		if (episodeData.isFiller) {
-			ep.firstElementChild.classList.add("filler");
-		}
-	}
+        if (!episodeData) continue;
+        if (episodeData.isFiller) {
+            ep.firstElementChild.classList.add("filler")
+        }
+    }
 })();
