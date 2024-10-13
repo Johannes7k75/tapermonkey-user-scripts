@@ -28,5 +28,5 @@ jobs:
           tag_name: "OnePieceFiller"
           name: "One Piece Filler ${{ env.DATE }}"
           files: |
-            ./OnePiece-Filler/one-piece.js
+            ./OnePiece-Filler/one-piece.json
     
