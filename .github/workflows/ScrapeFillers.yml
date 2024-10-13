@@ -12,12 +12,10 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       # run any `bun` or `bunx` command
-      - run: cd OnePiece-Filler
-      - run: bun install
-      - run: bun ScrapeFillers.ts
+      - run: cd OnePiece-Filler && bun install && bun ScrapeFillers.ts
 
       - uses: actions/upload-artifact@v4.4.3
         with:
           name: my-artifact
-          path: one-piece.js
+          path: ./OnePiece-Filler/one-piece.js
     
